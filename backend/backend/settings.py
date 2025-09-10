@@ -25,13 +25,12 @@ SECRET_KEY = "django-insecure-5l()y@(q^-+%m5ye$9dg4a6cqvypg^h)65=7tl075e!cm#5+&%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
 INSTALLED_APPS = [
     "api",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -121,3 +120,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = 'api.User'
+
+ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1"]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.githubpreview.dev",
+    "http://localhost:8000",
+    "https://localhost:8000",
+]
