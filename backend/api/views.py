@@ -3,7 +3,14 @@ from rest_framework import generics
 from .models import User, Project, Submission, Comment
 from .serializers import UserSerializer, ProjectSerializer, SubmissionSerializer, CommentSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework import permissions
+from rest_framework import permissions, generics
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 # User list and detail

@@ -31,6 +31,7 @@ DEBUG = True
 INSTALLED_APPS = [
     "api",
     "rest_framework",
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -48,6 +51,22 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.github.dev",
+    "https://*.githubpreview.dev",
+]
+
+ALLOWED_HOSTS = ["*", ".github.dev", ".githubpreview.dev"]
+
 
 ROOT_URLCONF = "backend.urls"
 
@@ -124,10 +143,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'api.User'
 
-ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1"]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.githubpreview.dev",
-    "http://localhost:8000",
-    "https://localhost:8000",
-]
